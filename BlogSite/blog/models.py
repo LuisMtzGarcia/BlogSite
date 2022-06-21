@@ -1,13 +1,14 @@
-from tabnanny import verbose
 from django.db import models
 
-# New imports added for ParentalKey, Orderable, InlinePanel
+# New imports added for ClusterTaggableManager, TaggedItemBase, MultiFieldPanel
 
 from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 
 class BlogIndexPage(Page):
@@ -33,6 +34,11 @@ class BlogPage(Page):
         verbose_name="Imagen principal",
         related_name='+',
     )
+    tags = ClusterTaggableManager(
+        through=BlogPageTag,
+        blank=True,
+        verbose_name="Etiquetas",
+    )
 
     def main_image(self):
         image = self.cover
@@ -48,12 +54,22 @@ class BlogPage(Page):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('date'),
+        MultiFieldPanel([
+            FieldPanel('date'),
+            FieldPanel('tags'),
+        ], heading="Informacion del Blog"),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
         FieldPanel('cover'),
         InlinePanel('gallery_images', label="Imagenes de la galeria"),
     ]
+
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
 
 class BlogPageGalleryImage(Orderable):
     page = ParentalKey(
