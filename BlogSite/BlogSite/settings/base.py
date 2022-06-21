@@ -24,6 +24,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    # My apps
+    "blog",
+
+    # Default Wagtail apps
     "home",
     "search",
     "wagtail.contrib.forms",
@@ -39,15 +43,14 @@ INSTALLED_APPS = [
     "wagtail",
     "modelcluster",
     "taggit",
+
+    # Default Django apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    # My apps
-    'blog',
 ]
 
 MIDDLEWARE = [
