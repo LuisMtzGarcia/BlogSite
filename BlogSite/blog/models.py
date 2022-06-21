@@ -27,7 +27,7 @@ class BlogPageTag(TaggedItemBase):
         related_name='tagged_items',
         on_delete=models.CASCADE
     )
-    
+
 class BlogPage(Page):
     date = models.DateField("Fecha del post")
     intro = models.CharField(max_length=250)
@@ -64,7 +64,7 @@ class BlogPage(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags'),
-        ], heading="Informacion del Blog"),
+        ], heading="Informacion de la publicacion"),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
         FieldPanel('cover'),
