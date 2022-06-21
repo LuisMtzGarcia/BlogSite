@@ -23,6 +23,13 @@ class BlogPage(Page):
     date = models.DateField("Fecha del post")
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
+    # Main image
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
