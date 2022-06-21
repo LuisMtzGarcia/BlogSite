@@ -21,6 +21,13 @@ class BlogIndexPage(Page):
         context['blogpages'] = blogpages
         return context
 
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+    
 class BlogPage(Page):
     date = models.DateField("Fecha del post")
     intro = models.CharField(max_length=250)
@@ -63,13 +70,6 @@ class BlogPage(Page):
         FieldPanel('cover'),
         InlinePanel('gallery_images', label="Imagenes de la galeria"),
     ]
-
-class BlogPageTag(TaggedItemBase):
-    content_object = ParentalKey(
-        'BlogPage',
-        related_name='tagged_items',
-        on_delete=models.CASCADE
-    )
 
 class BlogPageGalleryImage(Orderable):
     page = ParentalKey(
