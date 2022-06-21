@@ -1,8 +1,9 @@
+from django import forms
 from django.db import models
 
-# New imports added for register_snippet
+# New imports added for forms and ParentalManyToManyField
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
@@ -61,6 +62,7 @@ class BlogPage(Page):
         blank=True,
         verbose_name="Etiquetas",
     )
+    categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
 
     def main_image(self):
         image = self.cover
@@ -79,6 +81,7 @@ class BlogPage(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags'),
+            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="Informacion de la publicacion"),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
