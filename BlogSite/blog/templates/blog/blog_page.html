@@ -12,6 +12,23 @@
     <p class="meta">
         {{ page.date }}
     </p>
+
+    {% with categories=page.categories.all %}
+        {% if categories %}
+            <h3>
+                Publicado en:
+            </h3>
+            <ul>
+                {% for category in categories %}
+                    <li style="display: inline">
+                        {% image category.icon fill-32x32 style="vertical-align: middle" %}
+                        {{ category.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <div class="cover">
         {% image page.cover fill-320x240 %}
     </div>
