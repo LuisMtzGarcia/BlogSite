@@ -34,6 +34,14 @@ class BlogPage(Page):
         related_name='+',
     )
 
+    def main_image(self):
+        image = self.cover
+        if image:
+            return image
+        else:
+            return None
+
+
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),
