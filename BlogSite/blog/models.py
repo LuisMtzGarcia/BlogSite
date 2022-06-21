@@ -25,7 +25,7 @@ class BlogPage(Page):
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
     # Main image
-    image = models.ForeignKey(
+    cover = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.SET_NULL,
         blank=True,
@@ -43,7 +43,7 @@ class BlogPage(Page):
         FieldPanel('date'),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
-        FieldPanel('image'),
+        FieldPanel('cover'),
         InlinePanel('gallery_images', label="Imagenes de la galeria"),
     ]
 
