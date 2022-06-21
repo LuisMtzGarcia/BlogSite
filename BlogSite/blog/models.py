@@ -62,7 +62,11 @@ class BlogPage(Page):
         blank=True,
         verbose_name="Etiquetas",
     )
-    categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
+    categories = ParentalManyToManyField(
+        'blog.BlogCategory', 
+        blank=True,
+        verbose_name="Categorias",
+    )
 
     def main_image(self):
         image = self.cover
