@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 # New imports added for ParentalKey, Orderable, InlinePanel
@@ -28,7 +29,9 @@ class BlogPage(Page):
         'wagtailimages.Image',
         on_delete=models.SET_NULL,
         blank=True,
-        null=True
+        null=True,
+        verbose_name="Imagen principal",
+        related_name='+',
     )
 
     search_fields = Page.search_fields + [
@@ -40,6 +43,7 @@ class BlogPage(Page):
         FieldPanel('date'),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
+        FieldPanel('image'),
         InlinePanel('gallery_images', label="Imagenes de la galeria"),
     ]
 
