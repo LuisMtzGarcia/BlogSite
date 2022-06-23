@@ -27,9 +27,6 @@ INSTALLED_APPS = [
     # My apps
     "blog",
 
-    # Third-party apps
-    "bootstrap5",
-
     # Default Wagtail apps
     "home",
     "search",
