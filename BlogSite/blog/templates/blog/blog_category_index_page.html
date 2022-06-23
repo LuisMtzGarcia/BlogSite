@@ -1,12 +1,24 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
-
+{% load wagtailcore_tags category_tags %}
+{% load wagtailimages_tags %}
 {% block content %}
 
-    {% if request.GET.tag %}
+    {% if request.GET.category %}
+        {% if blogpages %}
+            <h4>
+                Mostrando las publicaciones de la categoria "{{ request.GET.category }}"
+            </h4>
+        {% else %}
+            <h4>
+                Todas las categorias:
+            </h4>
+            {% categories %}
+        {% endif %}
+    {% else %}
         <h4>
-            Mostrando las publicaciones de la categoria "{{ request.GET.category }}"
+            Todas las categorias:
         </h4>
+        {% categories %}
     {% endif %}
 
     {% for blogpage in blogpages %}
@@ -20,9 +32,11 @@
             {% endif %}
         </p>
     {% empty %}
-        <p>
-            No hay publicaciones en esta categoria.
-        </p>
+        {% if request.GET.category %}
+            <p>
+                No se ha publicado nada en esta categoria.
+            </p>
+        {% endif %}
     {% endfor %}
 
 {% endblock %}

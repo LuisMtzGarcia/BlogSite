@@ -1,7 +1,7 @@
 {% for category in categories %}
-    <p>
-        <a href="/">
+    <a href="/categorias/?category={{ category }}">
+        <button type="button">
             {{ category }}
-        </a>
-    </p>
+        </button>
+    </a>
 {% endfor %}

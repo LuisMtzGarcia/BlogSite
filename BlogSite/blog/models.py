@@ -138,7 +138,7 @@ class BlogCategoryIndexPage(Page):
     def get_context(self, request):
 
         # Filtery by category
-        category = request.get('category')
+        category = request.GET.get('category', '')
         blogpages = BlogPage.objects.filter(categories__name=category)
 
         # Update template context
