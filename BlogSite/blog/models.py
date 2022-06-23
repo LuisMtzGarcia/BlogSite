@@ -132,3 +132,16 @@ class BlogCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categorias del blog'
+
+class BlogCategoryIndexPage(Page):
+
+    def get_context(self, request):
+
+        # Filtery by category
+        category = request.get('category')
+        blogpages = BlogPage.objects.filter(categories__name=category)
+
+        # Update template context
+        context = super().get_context(request)
+        context['blogpages'] = blogpages
+        return context

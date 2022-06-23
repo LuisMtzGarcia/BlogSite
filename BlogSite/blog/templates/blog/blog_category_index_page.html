@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+    {% if request.GET.tag %}
+        <h4>
+            Mostrando las publicaciones de la categoria "{{ request.GET.category }}"
+        </h4>
+    {% endif %}
+
+    {% for blogpage in blogpages %}
+        <p>
+            <strong><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></strong><br />
+            <small>Revised: {{ blogpage.latest_revision_created_at }}</small><br />
+            {% if blogpage.author %}
+                <p>
+                    Por: {{ blogpage.author.profile }}
+                </p>
+            {% endif %}
+        </p>
+    {% empty %}
+        <p>
+            No hay publicaciones en esta categoria.
+        </p>
+    {% endfor %}
+
+{% endblock %}
