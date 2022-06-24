@@ -43,7 +43,8 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
+                <!-- Acceso a las secciones -->
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/blog/">
                             Blog
@@ -54,6 +55,30 @@
                             Categorias
                         </a>
                     </li>
+                </ul>
+                <!-- Opciones de usuario -->
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <span class="navbar-text">
+                            Hola, {{ user.username }}
+                        </span>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:logout' %}">
+                                Cerrar sesion
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:registro' %}">
+                                Registrate
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:login' %}">
+                                Accede a tu cuenta
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
 
