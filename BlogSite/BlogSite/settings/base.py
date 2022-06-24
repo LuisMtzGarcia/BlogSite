@@ -31,6 +31,12 @@ INSTALLED_APPS = [
     # Third-party apps
     "bootstrap5",
 
+    # Allauth required apps
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+
     # Default Wagtail apps
     "home",
     "search",
@@ -56,6 +62,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -83,9 +91,19 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.request",
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+
 ]
 
 WSGI_APPLICATION = "BlogSite.wsgi.application"
@@ -180,3 +198,18 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 WAGTAIL_FRONTEND_LOGIN_TEMPLATE = 'users/login.html'
 LOGIN_REDIRECT_URL = '/' # Redirects to home after successful login
 LOGOUT_REDIRECT_URL = '/' # Redirects to home after logout
+
+# Allauth settings
+
+LOGIN_URL = '/_util/login'
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_USERNAME_BLACKLIST = ['admin']
