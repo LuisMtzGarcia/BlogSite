@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     # My apps
     "blog",
+    "users",
 
     # Third-party apps
     "bootstrap5",
@@ -173,3 +174,8 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+# Wagtail Users settings
+
+WAGTAIL_FRONTEND_LOGIN_TEMPLATE = 'users/login.html'
+LOGIN_REDIRECT_URL = '/' # Redirects to home after successful login
