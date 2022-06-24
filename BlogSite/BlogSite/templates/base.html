@@ -44,6 +44,7 @@
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <!-- Acceso a las secciones -->
+                <!-- Bootstrap cambio mr y ml a me (margin end) y ms (margin start)-->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/blog/">
@@ -69,12 +70,12 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:registro' %}">
+                            <a class="nav-link" href="/">
                                 Registrate
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:login' %}">
+                            <a class="nav-link" href="/_util/login">
                                 Accede a tu cuenta
                             </a>
                         </li>
