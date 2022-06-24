@@ -179,3 +179,4 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 WAGTAIL_FRONTEND_LOGIN_TEMPLATE = 'users/login.html'
 LOGIN_REDIRECT_URL = '/' # Redirects to home after successful login
+LOGOUT_REDIRECT_URL = '/' # Redirects to home after logout
